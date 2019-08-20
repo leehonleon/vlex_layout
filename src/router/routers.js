@@ -1,4 +1,5 @@
 import Main from '@/components/main'
+import Mainboard from '@/components/main-board'
 import parentView from '@/components/parent-view'
 
 /**
@@ -27,8 +28,43 @@ export default [
     },
     component: () => import('@/view/login/login.vue')
   },
+
   {
     path: '/',
+    name: '_mainboard',
+    redirect: '/drawingboard',
+    component: Mainboard,
+    meta: {
+      hideInMenu: true,
+      notCache: true
+    },
+    children: [
+      {
+        path: '/drawingboard',
+        name: 'drawingboard',
+        meta: {
+          hideInMenu: true,
+          title: '控制台',
+          notCache: true,
+          icon: 'md-home'
+        }
+      },
+      {
+        path: 'tree_select_page',
+        name: 'tree_select_page',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '树状下拉选择器'
+        },
+        component: () => import('@/view/components/tree-select/index.vue')
+      }
+    ]
+  },
+  /*
+  -------------------------------------------------------------
+  */
+  {
+    path: '/sample',
     name: '_home',
     redirect: '/home',
     component: Main,
